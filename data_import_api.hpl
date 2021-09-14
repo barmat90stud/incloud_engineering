@@ -37,6 +37,11 @@
       <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Table output</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <transform>
     <name>Get data from XML</name>
@@ -63,12 +68,7 @@
     <rownum_field/>
     <encoding>UTF-8</encoding>
     <file>
-      <name>C:\Users\matth\switchdrive\HSLU Master\2. sem\Data Engineering in the Cloud\Exams\Jobfiles_XML</name>
-      <filemask>".\"*".xml"</filemask>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-      <name/>
+      <name>C:\Users\matth\switchdrive\HSLU Master\2. sem\Data Engineering in the Cloud\Exams\Jobfiles_XML\output_TOKEN_JOB_20200708_132737993.xml</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -952,6 +952,53 @@
     </GUI>
   </transform>
   <transform>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+      </field>
+      <field>
+        <name>title</name>
+      </field>
+      <field>
+        <name>location</name>
+      </field>
+      <field>
+        <name>id_1</name>
+      </field>
+      <field>
+        <name>id_2</name>
+      </field>
+      <field>
+        <name>id_3</name>
+      </field>
+      <field>
+        <name>id_4</name>
+      </field>
+      <field>
+        <name>city</name>
+      </field>
+      <field>
+        <name>job_weeks</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>112</yloc>
+    </GUI>
+  </transform>
+  <transform>
     <name>days per job ad</name>
     <type>Calculator</type>
     <description/>
@@ -965,33 +1012,20 @@
     <failIfNoFile>Y</failIfNoFile>
     <calculation>
       <calc_type>DATE_DIFF</calc_type>
-      <conversion_mask/>
-      <currency_symbol/>
-      <decimal_symbol/>
       <field_a>date</field_a>
       <field_b>created</field_b>
-      <field_c/>
       <field_name>job_days</field_name>
-      <grouping_symbol/>
       <remove>N</remove>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
-      <value_type/>
     </calculation>
     <calculation>
       <calc_type>CONSTANT</calc_type>
-      <conversion_mask/>
-      <currency_symbol/>
-      <decimal_symbol/>
       <field_a>7</field_a>
-      <field_b/>
-      <field_c/>
       <field_name>days_of_week</field_name>
-      <grouping_symbol/>
       <remove>N</remove>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
-      <value_type/>
     </calculation>
     <attributes/>
     <GUI>
@@ -1013,18 +1047,12 @@
     <failIfNoFile>Y</failIfNoFile>
     <calculation>
       <calc_type>DIVIDE</calc_type>
-      <conversion_mask/>
-      <currency_symbol/>
-      <decimal_symbol/>
       <field_a>job_days</field_a>
       <field_b>days_of_week</field_b>
-      <field_c/>
       <field_name>job_weeks</field_name>
-      <grouping_symbol/>
       <remove>N</remove>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
-      <value_type/>
     </calculation>
     <attributes/>
     <GUI>
@@ -1033,8 +1061,8 @@
     </GUI>
   </transform>
   <transform>
-    <name>Select values</name>
-    <type>SelectValues</type>
+    <name>Table output</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1043,48 +1071,28 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <commit>1000</commit>
+    <connection>exam mysql</connection>
     <fields>
-      <field>
-        <name>id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>title</name>
-        <rename/>
-      </field>
-      <field>
-        <name>location</name>
-        <rename/>
-      </field>
-      <field>
-        <name>id_1</name>
-        <rename/>
-      </field>
-      <field>
-        <name>id_2</name>
-        <rename/>
-      </field>
-      <field>
-        <name>id_3</name>
-        <rename/>
-      </field>
-      <field>
-        <name>id_4</name>
-        <rename/>
-      </field>
-      <field>
-        <name>city</name>
-        <rename/>
-      </field>
-      <field>
-        <name>job_weeks</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
+</fields>
+    <return_field/>
+    <ignore_errors>N</ignore_errors>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <return_keys>N</return_keys>
+    <schema/>
+    <specify_fields>N</specify_fields>
+    <table>api_data</table>
+    <tablename_field/>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_in_table>Y</tablename_in_table>
+    <truncate>N</truncate>
+    <use_batch>Y</use_batch>
     <attributes/>
     <GUI>
-      <xloc>816</xloc>
+      <xloc>912</xloc>
       <yloc>112</yloc>
     </GUI>
   </transform>
